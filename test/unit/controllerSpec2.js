@@ -36,4 +36,12 @@ describe('TransactionListController', function() {
       expect(controller.transactions).toEqual(transactionFixtures);
     });
   });
+
+  describe('this.balance', function() {
+    it('returns total balance', function() {
+      var $scope = {};
+      var controller = $controller('TransactionListController', { $scope: $scope });
+      expect(controller.balance()).toEqual(1050);
+    });
+  });
 });
