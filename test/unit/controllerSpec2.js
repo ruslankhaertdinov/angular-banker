@@ -25,4 +25,15 @@ describe('TransactionListController', function() {
       expect($scope.currentDate).toEqual(new Date());
     });
   });
+
+  describe('this.transactions', function() {
+    it('returns preset transactions', function() {
+      var $scope = {};
+      var controller = $controller('TransactionListController', { $scope: $scope });
+      var transactionFixtures = [
+        { text: 'Salary', amount: 1000, datetime: new Date(), checked: false },
+        { text: 'taxi', amount: 50, datetime: new Date(), checked: false } ];
+      expect(controller.transactions).toEqual(transactionFixtures);
+    });
+  });
 });
