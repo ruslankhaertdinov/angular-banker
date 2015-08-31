@@ -17,4 +17,12 @@ describe('TransactionListController', function() {
       expect($scope.checkDate(correctDateStr)).toEqual(null);
     });
   });
+
+  describe('$scope.currentDate', function() {
+    it('returns current date', function() {
+      var $scope = {};
+      var controller = $controller('TransactionListController', { $scope: $scope });
+      expect($scope.currentDate).toEqual(new Date());
+    });
+  });
 });
