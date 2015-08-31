@@ -44,4 +44,17 @@ describe('TransactionListController', function() {
       expect(controller.balance()).toEqual(1050);
     });
   });
+
+  describe('this.archive', function() {
+    // flaky test
+    it('deletes checked transactions', function() {
+      var $scope = {},
+        controller = $controller('TransactionListController', { $scope: $scope }),
+        archiveCandidate = controller.transactions[0],
+        restTransaction = controller.transactions[1];
+      archiveCandidate.checked = true;
+      controller.archive();
+      expect(controller.transactions).toEqual([restTransaction]);
+    });
+  });
 });
