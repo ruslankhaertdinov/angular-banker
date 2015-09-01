@@ -57,4 +57,22 @@ describe('TransactionListController', function() {
       expect(controller.transactions).toEqual([restTransaction]);
     });
   });
+
+  describe('this.addTransaction', function() {
+    it('adds new transaction to transactions list', function() {
+      var $scope = {},
+        controller = $controller('TransactionListController', { $scope: $scope });
+      controller.transactionAmount = '11,7';
+      controller.transactionText = 'This is new transaction';
+      controller.transactionDate = new Date();
+      controller.addTransaction();
+
+      var lastTransaction = controller.transactions[2];
+      expect(controller.transactions.length).toEqual(3);
+      expect(lastTransaction.transactionAmount).toEqual('11.7');
+      expect(lastTransaction.transactionText).toEqual('This is new transaction') ;
+      expect(lastTransaction.transactionDate).toEqual(new Date()) ;
+      expect(lastTransaction.checked).toEqual('false') ;
+    });
+  });
 });
