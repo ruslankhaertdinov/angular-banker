@@ -5,6 +5,10 @@ describe('simpleBanker App', function() {
     browser.get('app/index.html');
   });
 
+  it('should have a title', function() {
+    expect(browser.getTitle()).toEqual('Simple Banker app');
+  });
+
   describe('transactions list', function() {
     it('should filter the phone list as a user types into the search box', function() {
       var transactions = element.all(by.repeater('transaction in transactionList.transactions'));
