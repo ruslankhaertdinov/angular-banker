@@ -5,6 +5,10 @@
   "description": "Test app with angular.js",
   "repository": "https://github.com/ruslankhaertdinov/angular-banker",
   "license": "MIT",
+  "engines": {
+    "node": "0.10.x",
+    "npm": "2.1.x"
+  },
   "devDependencies": {
     "karma": "^0.12.16",
     "karma-chrome-launcher": "^0.1.4",
