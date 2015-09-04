@@ -37,24 +37,22 @@ describe('simpleBanker App', function() {
     });
   });
 
-  it('should add new transaction when submit form', function(){
+  it('should add new transaction when submit form and order by date', function(){
     expect($("#total_balance").getText()).toBe('$1,050.00');
 
-    //var date = element(by.model('transactionList.transactionDate'));
+    var date = element(by.model('transactionList.transactionDate'));
     var text = element(by.model('transactionList.transactionText'));
     var amount = element(by.model('transactionList.transactionAmount'));
 
     text.sendKeys('Ice cream');
     amount.sendKeys('-15');
+    date.sendKeys('03/09/2015');
     $('#submit_form').click();
 
-    //Expected '03/09/2015' to be Date(Thu Sep 03 2015 22:46:49 GMT+0300 (MSK)).
-    //expect(element(by.xpath('/html/body/div/div/div[2]/table/tbody/tr[3]/th[2]')).getText()).toBe(new Date());
-
-    expect(element(by.xpath('/html/body/div/div/div[2]/table/tbody/tr[3]/td[1]')).getText()).toBe('Ice cream');
-    expect(element(by.xpath('/html/body/div/div/div[2]/table/tbody/tr[3]/td[2]')).getText()).toBe('-15');
+    expect(element.all(by.css('.js-transaction-date')).first().getText()).toBe('03/09/2015');
+    expect(element.all(by.css('.js-transaction-text')).first().getText()).toBe('Ice cream');
+    expect(element.all(by.css('.js-transaction-amount')).first().getText()).toBe('-15');
     expect($("#total_balance").getText()).toBe('$1,035.00');
-
   });
 
   it('should archive selected transaction when click on Archive button', function(){
@@ -65,9 +63,4 @@ describe('simpleBanker App', function() {
 
     expect($("#total_balance").getText()).toBe('$50.00');
   });
-
-  //it('should show current balance', function(){});
-  //it('should update date field and reorder', function(){});
-  //it('should update text field', function(){});
-  //it('should update amount field', function(){});
 });

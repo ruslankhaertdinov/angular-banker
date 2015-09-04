@@ -41,12 +41,12 @@
         <tbody>
         <tr ng-repeat="transaction in transactionList.transactions | filter:query | orderBy:'datetime'">
           <th><input type="checkbox" ng-model="transaction.checked"></th>
-          <th editable-date="transaction.datetime" onbeforesave="checkDate($data)" e-required>{{transaction.datetime |
+          <th editable-date="transaction.datetime" onbeforesave="checkDate($data)" e-required class="js-transaction-date">{{transaction.datetime |
             date: 'dd/MM/yyyy'}}
           </th>
-          <td editable-text="transaction.text">{{transaction.text}}</td>
+          <td editable-text="transaction.text" class="js-transaction-text">{{transaction.text}}</td>
           <td editable-text="transaction.amount" e-required="true" e-pattern="^-?\d+(\.\d+)?$"
-              e-title="Only digits delimited by a dot">{{transaction.amount}}
+              e-title="Only digits delimited by a dot" class="js-transaction-amount">{{transaction.amount}}
           </td>
         </tr>
         <tr>
