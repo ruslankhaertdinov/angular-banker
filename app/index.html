@@ -18,7 +18,7 @@
   <h2>Simple Banker</h2>
 
   <p>
-  [ <a href="" ng-click="transactionList.archive()">archive</a> ]
+  [ <a href="" ng-click="transactionList.archive()" id="archive">archive</a> ]
 
   <div class="row">
     <div class="col-md-9">
@@ -53,7 +53,7 @@
           <td></td>
           <td></td>
           <td>Total balance</td>
-          <td>{{transactionList.balance() | currency}}</td>
+          <td id="total_balance">{{transactionList.balance() | currency}}</td>
         </tr>
         </tbody>
       </table>
