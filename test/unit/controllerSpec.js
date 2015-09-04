@@ -46,7 +46,6 @@ describe('TransactionListController', function() {
   });
 
   describe('this.archive', function() {
-    // flaky test
     it('deletes checked transactions', function() {
       var $scope = {},
         controller = $controller('TransactionListController', { $scope: $scope }),
@@ -69,10 +68,13 @@ describe('TransactionListController', function() {
 
       var lastTransaction = controller.transactions[2];
       expect(controller.transactions.length).toEqual(3);
-      expect(lastTransaction.transactionAmount).toEqual('11.7');
-      expect(lastTransaction.transactionText).toEqual('This is new transaction') ;
-      expect(lastTransaction.transactionDate).toEqual(new Date()) ;
-      expect(lastTransaction.checked).toEqual('false') ;
+      expect(lastTransaction.amount).toEqual('11.7');
+      expect(lastTransaction.text).toEqual('This is new transaction') ;
+      expect(lastTransaction.checked).toEqual(false);
+
+      var transactionDate = new Date(lastTransaction.datetime).setHours(0,0,0,0);
+      var currentDate = new Date().setHours(0,0,0,0);
+      expect(transactionDate).toEqual(currentDate);
     });
   });
 });
