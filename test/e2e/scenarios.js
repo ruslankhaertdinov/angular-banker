@@ -10,7 +10,7 @@ describe('simpleBanker App', function() {
   });
 
   describe('transactions list', function() {
-    it('should filter the phone list as a user types into the search box', function() {
+    it('should filter the transactions list as a user types into the search box', function() {
       var transactions = element.all(by.repeater('transaction in transactionList.transactions'));
       var query = element(by.model('query'));
 
@@ -24,25 +24,34 @@ describe('simpleBanker App', function() {
       expect(transactions.count()).toBe(0);
     });
 
-    it('should reorder when date is changed', function(){});
+    it('should archive selected transaction when click on Archive button', function(){
+      var $totalBalance = $("#total_balance");
+
+      expect($totalBalance.getText()).toBe('$1,050.00');
+
+      element.all(by.css('input[type="checkbox"]')).first().click();
+      $('#archive').click();
+
+      expect($totalBalance.getText()).toBe('$50.00');
+    });
   });
 
   describe('Transaction details', function() {
     it('should display transaction details', function() {
-      expect(element(by.xpath('/html/body/div/div/div[2]/table/tbody/tr[1]/td[1]')).getText()).toBe('Salary');
-      expect(element(by.xpath('/html/body/div/div/div[2]/table/tbody/tr[1]/td[2]')).getText()).toBe('1000');
-
-      expect(element(by.xpath('/html/body/div/div/div[2]/table/tbody/tr[2]/td[1]')).getText()).toBe('taxi');
-      expect(element(by.xpath('/html/body/div/div/div[2]/table/tbody/tr[2]/td[2]')).getText()).toBe('50');
+      expect(element.all(by.css('.js-transaction-text')).get(0).getText()).toBe('Salary');
+      expect(element.all(by.css('.js-transaction-text')).get(1).getText()).toBe('taxi');
+      expect(element.all(by.css('.js-transaction-amount')).get(0).getText()).toBe('1000');
+      expect(element.all(by.css('.js-transaction-amount')).get(1).getText()).toBe('50');
     });
   });
 
   it('should add new transaction when submit form and order by date', function(){
-    expect($("#total_balance").getText()).toBe('$1,050.00');
-
+    var $totalBalance = $("#total_balance");
     var date = element(by.model('transactionList.transactionDate'));
     var text = element(by.model('transactionList.transactionText'));
     var amount = element(by.model('transactionList.transactionAmount'));
+
+    expect($totalBalance.getText()).toBe('$1,050.00');
 
     text.sendKeys('Ice cream');
     amount.sendKeys('-15');
@@ -52,15 +61,6 @@ describe('simpleBanker App', function() {
     expect(element.all(by.css('.js-transaction-date')).first().getText()).toBe('03/09/2015');
     expect(element.all(by.css('.js-transaction-text')).first().getText()).toBe('Ice cream');
     expect(element.all(by.css('.js-transaction-amount')).first().getText()).toBe('-15');
-    expect($("#total_balance").getText()).toBe('$1,035.00');
-  });
-
-  it('should archive selected transaction when click on Archive button', function(){
-    expect($("#total_balance").getText()).toBe('$1,050.00');
-
-    element.all(by.css('input[type="checkbox"]')).first().click();
-    $('#archive').click();
-
-    expect($("#total_balance").getText()).toBe('$50.00');
+    expect($totalBalance.getText()).toBe('$1,035.00');
   });
 });
